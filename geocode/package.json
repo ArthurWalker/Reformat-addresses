@@ -2,10 +2,6 @@
   "name": "geocode",
   "version": "0.1.0",
   "private": true,
-  "script":{
-    "start":"",
-    "test":""
-  },
   "dependencies": {
     "aws-sdk": "^2.272.1",
     "axios": "^0.18.0",
