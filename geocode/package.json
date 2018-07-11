@@ -33,6 +33,8 @@
     "loopback-datasource-juggler": "^3.22.2",
     "material-ui": "^0.20.1",
     "mkdirp": "^0.5.1",
+    "mongodb": "^3.1.1",
+    "mssql": "^4.1.0",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-scripts": "1.1.4",
@@ -43,6 +45,7 @@
     "style-loader": "^0.21.0",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
+    "superagent": "^3.8.3",
     "webfontloader": "^1.6.28",
     "webpack": "^3.11.0"
   },
