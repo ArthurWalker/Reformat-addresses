@@ -36,5 +36,5 @@ app.get('/',function(req,res) {
 });
 
 var server = app.listen(5000,function () {
-    console.log('Server is running ...');
+    console.log('Node.js web server at port 5000 is running ...');
 });
