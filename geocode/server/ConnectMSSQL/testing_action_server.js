@@ -30,16 +30,24 @@ app.get('/',function(req,res) {
                 result.recordset.forEach(address => {
                     executeEachAddres(address.MPRN_Address);
                 });
-                word_occurences=count_unique_part(all_addresses);
-                res.send(word_occurences);
+    // Statistic purpose:
+                // Count occurences with an array format including sortable and dictionary
+                var count_unique_part=require('./action/count_unique_part');
+                var word_occurences=count_unique_part(all_addresses);
+                //res.send(word_occurences[0]);
+                
+                // Take the number of 2 letter's words
+                var take_2_letter = require('./action/take_2_letter');
+                // from a non sorted dictionary
+                var two_letter_words = take_2_letter(word_occurences[1]);
+                res.send(two_letter_words[0]);
             }
             sql.close();
         });
     });
 
+    // Perform with each address
     var format_address =require('./action/format_address');
-    var count_unique_part=require('./action/count_unique_part');
-
     var executeEachAddres = function(address){
         address=format_address(address);
         all_addresses+=address+ " ";

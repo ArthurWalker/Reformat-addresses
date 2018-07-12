@@ -26,9 +26,10 @@ var format_address = function(address){
         formated_address=formated_address.replace(/\s\s+/g,' ');
         
         
-    }else{
-        formated_address="No address";
     }
+    //else{
+    //    formated_address="No address";
+   // }
     formated_address=formated_address.trim();
     formated_address=formated_address.toUpperCase();
     //console.log(formated_address);

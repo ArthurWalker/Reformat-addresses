@@ -22,7 +22,13 @@ var count_unique_part = function (addresses) {
     sortable.sort(function(a,b){
         return b[1]-a[1];
     });
-    return sortable;
+    
+    return [sortable,dict];
+    // 2nd way to return 2 results at once
+    //return {
+    //    dict:dict,
+    //    sortable:sortable
+    //}
 };
 
 module.exports = count_unique_part;
