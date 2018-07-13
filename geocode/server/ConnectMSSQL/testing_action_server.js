@@ -33,19 +33,24 @@ app.get('/',function(req,res) {
                     executeEachAddres(address.MPRN_Address);
                 });
     // Statistic purpose:
-                // Count occurences with an array format including sortable and dictionary
+                // Count occurences with an array format including sortable(word_occurences[0]) and dictionary(word_occurences[1])
                 var count_unique_part=require('./functions/count_unique_part');
                 var word_occurences=count_unique_part(all_addresses);
                 //res.send(word_occurences[0]);
                 
                 // Summary data
                 var summary = require('./functions/summary');
-                res.send(summary(word_occurences[0])[1]);
+                // table 1: nums of ouccrences with incremental nums: 
+                var occurences_table_with_num = summary(word_occurences[0])[0];
+                // table 2: the length of words:  occurences_table_with_length_word
+                var occurences_table_with_length_word = summary(word_occurences[0])[1];
+                res.send(occurences_table_with_length_word);
 
                 //Make CVS file and download
-                var dataToCSV=require('./functions/toCSV');
-                const data = [word_occurences[0]];
-                // whereas this part is in charge of telling what data should be parsed and be downloaded
+                var toCSV=require('./functions/toCSV');
+                const data1 =occurences_table_with_num;
+                const data2 =occurences_table_with_length_word;
+                toCSV(data1,data2);
   
                 // Take the number of 2 letter's words
                 var take_2_letter = require('./functions/take_2_letter');
@@ -65,6 +70,7 @@ app.get('/',function(req,res) {
         //lookFor(address);
         all_addresses+=address+ " ";
     }
+
 });
 
 var server = app.listen(5000,function () {

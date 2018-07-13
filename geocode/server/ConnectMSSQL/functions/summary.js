@@ -15,7 +15,7 @@ var summary = function(array_occurences){
     // return to array because CSV works well with array not Dictionary
     var sortable=[];
     for( var word in dict){
-        sortable.push([word,dict[word]]);
+        sortable.push([word,dict[word][0],dict[word][1]]);
     }
 
     var sortable_dict_characters=[];

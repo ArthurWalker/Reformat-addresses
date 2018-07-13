@@ -1,7 +1,12 @@
-// The function gets a list of objects ('dataList' arg), each one would be a single row in the future-to-be CSV file
-// The headers to the columns would be sent in an array ('headers' args). It is taken as the second arg
-function dataToCSV(){
 
+var fs = require('fs');
+var csv = require('fast-csv');
+
+var toCSV = function(arrayOfObjects1,arrayOfObjects2) {
+    var wo = fs.createWriteStream('word_occurences_statistic.csv');
+    var nw = fs.createWriteStream('nums_word_statistic.csv');
+    csv.write(arrayOfObjects1,{headers:true}).pipe(wo);
+    csv.write(arrayOfObjects2,{headers:true}).pipe(nw);
 }
 
-module.exports= dataToCSV;
+module.exports= toCSV;
