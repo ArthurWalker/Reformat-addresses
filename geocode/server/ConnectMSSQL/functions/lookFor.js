@@ -1,5 +1,10 @@
 var lookFor = function(address){
-    if (address.includes(" DB ")){
+    var word = "KILBRANISHDRIVEWOODVIEWPARKLIMERICK";
+    if (address.includes(" "+word+" ")){
+        console.log(address);
+    }else if (address.includes(" "+word)){
+        console.log(address);
+    }else if (address.includes(word+" ")){
         console.log(address);
     }
 }

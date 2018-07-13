@@ -56,7 +56,7 @@ var format_address = function(address){
         // formated_address=formated_address.replace(' CO ',' County');
 
         //Formating: replace . and big gap -> 1 space
-        formated_address=formated_address.replace(/[\s\s/./,0-9]+/g,' ');
+        formated_address=formated_address.replace(/[\s\s/./,0-9()!'@#~*+^%$`:/-]+/g,' ');
         
         
     }

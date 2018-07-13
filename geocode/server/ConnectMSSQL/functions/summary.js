@@ -5,12 +5,17 @@ var summary = function(array_occurences){
     array_occurences.map((token,num) => {
         dict[num]=token;
         if (dict_characters[token[0].length]==undefined){
-            dict_characters[token[0].length]=[];
+            //dict_characters[token[0].length]=[];
+            dict_characters[token[0].length]={};    
         }
-        dict_characters[token[0].length].push(token);
+        //dict_characters[token[0].length].push(token);
+        // var sortable_dict_characters=[];
+        // for( var word in dict_characters){
+        //     sortable_dict_characters.push([word,dict_characters[word]]);
+        // }
+        dict_characters[token[0].length][token[0]]=token[1];
     });
 
-    
 
     // return to array because CSV works well with array not Dictionary
     var sortable=[];
@@ -18,12 +23,8 @@ var summary = function(array_occurences){
         sortable.push([word,dict[word][0],dict[word][1]]);
     }
 
-    var sortable_dict_characters=[];
-    for( var word in dict_characters){
-        sortable_dict_characters.push([word,dict_characters[word]]);
-    }
 
-    return [sortable,sortable_dict_characters];
+    return [sortable,dict_characters];
 }
 
 module.exports=summary;
