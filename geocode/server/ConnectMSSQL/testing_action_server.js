@@ -14,6 +14,8 @@ app.get('/',function(req,res) {
         database:'OPEN_DATA'
     };
 
+    //this statement tells the browser what type of data is supposed to download and force it to download
+
     // connect to your database
     sql.connect(config,function(err) {
         if (err) {
@@ -22,7 +24,7 @@ app.get('/',function(req,res) {
         // create request object
         var request = new sql.Request();
         // query (MPRN address) to the database and get the records
-        var query = 'select  MPRN_Address from TD_MPRN_GUID_LINK';
+        var query = 'select top 10 MPRN_Address from TD_MPRN_GUID_LINK';
         request.query(query, function (err,result) {
             if (err) {console.log(err);}
             else{
@@ -32,24 +34,35 @@ app.get('/',function(req,res) {
                 });
     // Statistic purpose:
                 // Count occurences with an array format including sortable and dictionary
-                var count_unique_part=require('./action/count_unique_part');
+                var count_unique_part=require('./functions/count_unique_part');
                 var word_occurences=count_unique_part(all_addresses);
                 //res.send(word_occurences[0]);
                 
+                // Summary data
+                var summary = require('./functions/summary');
+                res.send(summary(word_occurences[0])[1]);
+
+                //Make CVS file and download
+                var dataToCSV=require('./functions/toCSV');
+                const data = [word_occurences[0]];
+                // whereas this part is in charge of telling what data should be parsed and be downloaded
+  
                 // Take the number of 2 letter's words
-                var take_2_letter = require('./action/take_2_letter');
+                var take_2_letter = require('./functions/take_2_letter');
                 // from a non sorted dictionary
                 var two_letter_words = take_2_letter(word_occurences[1]);
-                res.send(two_letter_words[0]);
+                //res.send(two_letter_words[0]);
             }
             sql.close();
         });
     });
 
     // Perform with each address
-    var format_address =require('./action/format_address');
+    var format_address =require('./functions/format_address');
+    var lookFor =require('./functions/lookFor');
     var executeEachAddres = function(address){
         address=format_address(address);
+        //lookFor(address);
         all_addresses+=address+ " ";
     }
 });
