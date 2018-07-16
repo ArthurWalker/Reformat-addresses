@@ -3,9 +3,17 @@ var app = express();
 var http = require('http');
 
 app.get('/',function(req,res) {
+
+    
+    // res.setHeader('Content-Type', 'text/html');
+    // res.setHeader('X-Foo', 'bar');
+    // res.writeHead(200, { 'Content-Type': 'text/plain' });
+
+
     var sql = require("mssql");
 
     var all_addresses= "";
+    var strange_address=[];
     // config your database
     var config = {
         user:'OpenDataLogin',
@@ -24,7 +32,7 @@ app.get('/',function(req,res) {
         // create request object
         var request = new sql.Request();
         // query (MPRN address) to the database and get the records
-        var query = 'select MPRN_Address from TD_MPRN_GUID_LINK';
+        var query = 'select top 1000 MPRN_Address from TD_MPRN_GUID_LINK';
         request.query(query, function (err,result) {
             if (err) {console.log(err);}
             else{
@@ -32,7 +40,6 @@ app.get('/',function(req,res) {
                 result.recordset.forEach(address => {
                     executeEachAddres(address.MPRN_Address);
                 });
-
     // Statistic purpose:
                 // Count occurences with an array format including sortable which is word_occurences[0]) and dictionary which is word_occurences[1])
                 var count_unique_part=require('./functions/count_unique_part');
@@ -51,7 +58,7 @@ app.get('/',function(req,res) {
                 const data2 =occurences_table_with_length_word;
                 //toCSV(data1,data2);
 
-                res.send(occurences_table_with_length_word);
+                res.send(JSON.stringify(occurences_table_with_length_word));
             }
             sql.close();
         });
@@ -66,8 +73,8 @@ app.get('/',function(req,res) {
         new_address=format_address(address);
         all_addresses+=new_address+ " "; // to find unique address
         //lookFor(new_address);
-       }
-
+    }
+ //   res.end();
 });
 
 var server = app.listen(5000,function () {
