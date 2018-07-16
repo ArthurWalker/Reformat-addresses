@@ -1,7 +1,7 @@
 var take_2_letter = function(word_dictionary){
     var dict = {};
     Object.keys(word_dictionary).forEach(function(key) {
-        if (/[A-Z]{2}/.test(key) && key.length>=10){
+        if (/[A-Z]{2}/.test(key) && key.length==2){
             dict[key] = word_dictionary[key];
         }
     });

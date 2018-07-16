@@ -49,14 +49,8 @@ app.get('/',function(req,res) {
                 const data1 =occurences_table_with_num;
                 const data2 =occurences_table_with_length_word;
                 //toCSV(data1,data2);
-                
-                // Take the number of 2 letter's words
-                var take_2_letter = require('./functions/take_2_letter');
-                // from a non sorted dictionary: word_occurences[1] while sorted array: word_occurences[0]
-                var two_letter_words = take_2_letter(word_occurences[1]);
 
-                
-                res.send(occurences_table_with_length_word);
+                res.send(occurences_table_with_length_word["2"]);
             }
             sql.close();
         });
@@ -65,11 +59,13 @@ app.get('/',function(req,res) {
     // Perform with each address
     var format_address =require('./functions/format_address');
     var lookFor =require('./functions/lookFor');
+    var new_address;
     var executeEachAddres = function(address){
-        address=format_address(address);
         //lookFor(address);
-        all_addresses+=address+ " ";
-    }
+        new_address=format_address(address);
+        lookFor(new_address);
+        all_addresses+=new_address+ " "; // to find unique address
+        }
 
 });
 

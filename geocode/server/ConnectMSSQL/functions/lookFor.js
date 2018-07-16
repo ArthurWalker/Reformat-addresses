@@ -1,12 +1,13 @@
 var lookFor = function(address){
-    var word = "KILBRANISHDRIVEWOODVIEWPARKLIMERICK";
-    if (address.includes(" "+word+" ")){
-        console.log(address);
-    }else if (address.includes(" "+word)){
-        console.log(address);
-    }else if (address.includes(word+" ")){
+    var word = /\sTE\s/;
+    if (address!=null && word.test(address)){
         console.log(address);
     }
+
+    // var term = " TE ";
+    // if (address != null && address.toUpperCase().includes(term)){
+    //     console.log(address);
+    // }
 }
 
 module.exports=lookFor;
