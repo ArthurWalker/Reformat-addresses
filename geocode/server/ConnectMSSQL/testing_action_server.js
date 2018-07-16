@@ -32,6 +32,7 @@ app.get('/',function(req,res) {
                 result.recordset.forEach(address => {
                     executeEachAddres(address.MPRN_Address);
                 });
+
     // Statistic purpose:
                 // Count occurences with an array format including sortable which is word_occurences[0]) and dictionary which is word_occurences[1])
                 var count_unique_part=require('./functions/count_unique_part');

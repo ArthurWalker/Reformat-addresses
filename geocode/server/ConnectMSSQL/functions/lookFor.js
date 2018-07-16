@@ -1,5 +1,5 @@
 var lookFor = function(address){
-    var word = /\sTE\s/;
+    var word = /\bAM\b/;
     if (address!=null && word.test(address)){
         console.log(address);
     }
