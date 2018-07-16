@@ -25,6 +25,10 @@ var format_address = function(address){
         }
     //RULE: Formating: remove all single letters
         formated_address=formated_address.replace(/\b[A-Z]\b/g,'');
+
+    //RULE: Formating: remove all duplicate words standing together
+        var removeDup=require('./removeDup');
+        formated_address=removeDup(formated_address);
     }
     
     formated_address=formated_address.toUpperCase();
