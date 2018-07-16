@@ -9,66 +9,69 @@ var format_address = function(address){
         
         formated_address=formated_address.toUpperCase();
         //Formating: replace . and big gap -> 1 space
-        formated_address=formated_address.replace(/[\s\s\.\/\\,0-9\(\)\|\?\[\]!'@#~\*\+^%\$`:/\-;]+/g,' ');
         
-        // Formating CO -> County
-        formated_address=formated_address.replace(/\sCO\b/g,' County');
+        formated_address=formated_address.replace(/\s[\s\s\/\\\(\)\|\?\[\]0-9.,!'@#~*=_+^%$&`*":\-;<>]+\s/g,' ');
+        
+        // Formating CO -> County and remove it
+        formated_address=formated_address.replace(/\sCO\b/g,' COUNTY');
+        formated_address=formated_address.replace(/\sCOUNTY\b/g,'');
+        
         // Formating Dublin: DB,DL
         //formated_address.split(' DB ').join(' Dublin ');
-        formated_address=formated_address.replace(/\sDB\b/g,' Dublin ');
-        formated_address=formated_address.replace(/\sDL\b/g,' Dublin ');
+        formated_address=formated_address.replace(/\sDB\b/g,' DUBLIN ');
+        formated_address=formated_address.replace(/\sDL\b/g,' DUBLIN ');
         // Formating Kilkenny: KK
-        formated_address=formated_address.replace(/\sKK\b/g,' Kilkenny ');
+        formated_address=formated_address.replace(/\sKK\b/g,' KILKENNY ');
         // Formating Kildare: KE
-        formated_address=formated_address.replace(/\sKE\b/g,' Kildare ');
+        formated_address=formated_address.replace(/\sKE\b/g,' KILDARE ');
         // Formating Cork: CK
-        formated_address=formated_address.replace(/\sCK\b/g,' Cork ');
+        formated_address=formated_address.replace(/\sCK\b/g,' CORK ');
         // Formating Galway: GW
-        formated_address=formated_address.replace(/\sGW\b/g,' Galway ');
+        formated_address=formated_address.replace(/\sGW\b/g,' GALWAY ');
         // Formating Kerry: KY
-        formated_address=formated_address.replace(/\sKY\b/g,' Kerry ');
+        formated_address=formated_address.replace(/\sKY\b/g,' KERRY ');
         // Formating Mayo: MO
-        formated_address=formated_address.replace(/\sMO\b/g,' Mayo ');
+        formated_address=formated_address.replace(/\sMO\b/g,' MAYO ');
         // Formating Clare: CE
-        formated_address=formated_address.replace(/\sCE\b/g,' Clare ');
+        formated_address=formated_address.replace(/\sCE\b/g,' CLARE ');
         // Formating Down: DN
-        formated_address=formated_address.replace(/\sDN\b/g,' Down ');
+        formated_address=formated_address.replace(/\sDN\b/g,' DOWN ');
         // Formating Wexford: WX
-        formated_address=formated_address.replace(/\sWX\b/g,' Wexford ');
+        formated_address=formated_address.replace(/\sWX\b/g,' WEXFORD ');
         // Formating Limerick: LK
-        formated_address=formated_address.replace(/\sLK\b/g,' Limerick ');
+        formated_address=formated_address.replace(/\sLK\b/g,' LIMERICK ');
         // Formating Leitrim: LM
-        formated_address=formated_address.replace(/\sLM\b/g,' Leitrim ');
+        formated_address=formated_address.replace(/\sLM\b/g,' LEITRIM ');
         // Formating Laois: LS
-        formated_address=formated_address.replace(/\sLS\b/g,' Laois ');
+        formated_address=formated_address.replace(/\sLS\b/g,' LAOIS ');
         // Formating Offaly: OY
-        formated_address=formated_address.replace(/\sOY\b/g,' Offaly ');
+        formated_address=formated_address.replace(/\sOY\b/g,' OFFALY ');
         // Formating Monaghan: MN
-        formated_address=formated_address.replace(/\sMN\b/g,' Monaghan ');
+        formated_address=formated_address.replace(/\sMN\b/g,' MONAGHAN ');
         // Formating Louth: LH
-        formated_address=formated_address.replace(/\sLH\b/g,' Louth ');
+        formated_address=formated_address.replace(/\sLH\b/g,' LOUTH ');
         // Formating Meath: MH
-        formated_address=formated_address.replace(/\sMH\b/g,' Meath ');
+        formated_address=formated_address.replace(/\sMH\b/g,' MEATH ');
         // Formating Cavan: CN
-        formated_address=formated_address.replace(/\sCN\b/g,' Cavan ');
+        formated_address=formated_address.replace(/\sCN\b/g,' CAVAN ');
         // Formating Carlow: CW
-        formated_address=formated_address.replace(/\sCW\b/g,' Carlow ');
+        formated_address=formated_address.replace(/\sCW\b/g,' CARLOW ');
         // Formating Wicklow: WW
-        formated_address=formated_address.replace(/\sWW\b/g,' Wicklow ');
+        formated_address=formated_address.replace(/\sWW\b/g,' WICKLOW ');
         // Formating Waterford: WD
-        formated_address=formated_address.replace(/\sWD\b/g,' Waterford ');
+        formated_address=formated_address.replace(/\sWD\b/g,' WATERFORD ');
         // Formating Longford: LD 
-        formated_address=formated_address.replace(/\sLD\b/g,' Longford ');
+        formated_address=formated_address.replace(/\sLD\b/g,' LONGFORD ');
         // Formating Sligo: SO
-        formated_address=formated_address.replace(/\sSO\b/g,' Sligo ');
+        formated_address=formated_address.replace(/\sSO\b/g,' SLIGO ');
         // Formating Westmeath: WH
-        formated_address=formated_address.replace(/\sWH\b/g,' Westmeath ');
+        formated_address=formated_address.replace(/\sWH\b/g,' WESTMEATH ');
         // Formating Antrim: AM
-        formated_address=formated_address.replace(/\sAM\b/g,' Antrim ');
+        formated_address=formated_address.replace(/\sAM\b/g,' ANTRIM ');
         // Formating Roscommon: RN
-        formated_address=formated_address.replace(/\sRN\b/g,' Roscommon ');
+        formated_address=formated_address.replace(/\sRN\b/g,' ROSCOMMON ');
         // Formating Roscommon: TE
-        formated_address=formated_address.replace(/\sTE\b/g,' Tyrone ');
+        formated_address=formated_address.replace(/\sTE\b/g,' TYRONE ');
         
     }
     //else{

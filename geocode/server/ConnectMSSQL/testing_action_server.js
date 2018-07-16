@@ -51,7 +51,7 @@ app.get('/',function(req,res) {
                 const data2 =occurences_table_with_length_word;
                 //toCSV(data1,data2);
 
-                res.send(occurences_table_with_length_word["2"]);
+                res.send(occurences_table_with_length_word);
             }
             sql.close();
         });
@@ -64,9 +64,9 @@ app.get('/',function(req,res) {
     var executeEachAddres = function(address){
         //lookFor(address);
         new_address=format_address(address);
-        lookFor(new_address);
         all_addresses+=new_address+ " "; // to find unique address
-        }
+        //lookFor(new_address);
+       }
 
 });
 

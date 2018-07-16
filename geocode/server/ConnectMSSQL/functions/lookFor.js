@@ -1,13 +1,9 @@
 var lookFor = function(address){
-    var word = /\bAM\b/;
-    if (address!=null && word.test(address)){
+    //search for a standalone word with this format : \bCOUNTY\b
+    var word = /[\/\\\(\)\|\?\[\].,!'@#~*=_+^%$&`*":\-;<>]+/;
+    if (address!=null && word.test(address.toUpperCase())){
         console.log(address);
     }
-
-    // var term = " TE ";
-    // if (address != null && address.toUpperCase().includes(term)){
-    //     console.log(address);
-    // }
 }
 
 module.exports=lookFor;
