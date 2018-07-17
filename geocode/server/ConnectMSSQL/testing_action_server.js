@@ -13,7 +13,7 @@ app.get('/',function(req,res) {
     var sql = require("mssql");
 
     var all_addresses= "";
-    var strange_address=[];
+    var results=[["Original Addresses","Formated Addresses"]];
     // config your database
     var config = {
         user:'OpenDataLogin',
@@ -33,6 +33,7 @@ app.get('/',function(req,res) {
         var request = new sql.Request();
         // query (MPRN address) to the database and get the records
         var query = 'select MPRN_Address from TD_MPRN_GUID_LINK';
+
         request.query(query, function (err,result) {
             if (err) {console.log(err);}
             else{
@@ -58,6 +59,9 @@ app.get('/',function(req,res) {
                 const data2 =occurences_table_with_length_word;
                 //toCSV(data1,data2);
                 
+                toCSV(results,null); //Put formated addresses into file
+
+
                 res.send(JSON.stringify(occurences_table_with_length_word));
             }
             sql.close();
@@ -71,6 +75,7 @@ app.get('/',function(req,res) {
     var executeEachAddres = function(address){
         //lookFor("",address);
         new_address=format_address(address);
+        results.push([address,new_address]);
         all_addresses+=new_address+ " "; // to find unique address
         lookFor("   => ",new_address);
     }

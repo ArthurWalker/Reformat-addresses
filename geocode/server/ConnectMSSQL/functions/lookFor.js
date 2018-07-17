@@ -4,7 +4,6 @@ var lookFor = function(sentence,address){
     
     //var word = /[\/\\\(\)\|\?\[\].,!'@#~*=_+^%$&`*":\-;<>]+/;
     var word =/\b([A-Z]+)\s+\1\b/; // search duplicate words in javascript
-    //var word=/\bROAD\s\sROAD\b/;
     if (address!=null && word.test(address.toUpperCase())){
         console.log(sentence+" "+address);
     }
