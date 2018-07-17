@@ -32,7 +32,7 @@ app.get('/',function(req,res) {
         // create request object
         var request = new sql.Request();
         // query (MPRN address) to the database and get the records
-        var query = 'select top 1000 MPRN_Address from TD_MPRN_GUID_LINK';
+        var query = 'select MPRN_Address from TD_MPRN_GUID_LINK';
         request.query(query, function (err,result) {
             if (err) {console.log(err);}
             else{
@@ -57,7 +57,7 @@ app.get('/',function(req,res) {
                 const data1 =occurences_table_with_num;
                 const data2 =occurences_table_with_length_word;
                 //toCSV(data1,data2);
-
+                
                 res.send(JSON.stringify(occurences_table_with_length_word));
             }
             sql.close();
@@ -69,10 +69,10 @@ app.get('/',function(req,res) {
     var lookFor =require('./functions/lookFor');
     var new_address;
     var executeEachAddres = function(address){
-        //lookFor(address);
+        //lookFor("",address);
         new_address=format_address(address);
         all_addresses+=new_address+ " "; // to find unique address
-        //lookFor(new_address);
+        lookFor("   => ",new_address);
     }
  //   res.end();
 });
