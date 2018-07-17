@@ -66,6 +66,7 @@ app.get('/',function(req,res) {
     var lookFor =require('./functions/lookFor');
     var new_address;
     var executeEachAddres = function(address){
+       
         new_address=format_address(address); // to execute each address
         results.push([address,new_address]); // to put into files to download
         all_addresses+=new_address+ " "; // to find unique address

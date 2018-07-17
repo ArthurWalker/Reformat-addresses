@@ -22,10 +22,10 @@ var format_address = function(address){
         formated_address=replaceShort(formated_address);
 
     //RULE : Seperate all alphnumeric words
-        var seperateAlNum=require('./seperateAlNum');
-        if (/\b[0-9]+[A-Z]+\b/.test(formated_address)){
-            formated_address= seperateAlNum(formated_address);
-        }
+        // var seperateAlNum=require('./seperateAlNum');
+        // if (/\b[0-9]+[A-Z]+\b/.test(formated_address)){
+        //     formated_address= seperateAlNum(formated_address);
+        // }
 
         //Note: still this one     
         //+ var word = /([A-Z][0-9])/;
@@ -45,10 +45,17 @@ var format_address = function(address){
         var sperateLet_Num=require('./sperateLet_Num');
         var word2 =/\b([A-Z]+)\s([0-9]+)(\s\1\s\2)+\b/;
         if (word2.test(formated_address)){
-            console.log(formated_address);
             formated_address=removeDup_Dub(formated_address);
             formated_address=sperateLet_Num(formated_address);
-            console.log("   => "+formated_address);
+        }
+        var d6W=/\b[A-Z]+6W\b/;
+        var remove6W=require('./remove6W');
+        if (d6W.test(formated_address)){
+            formated_address=remove6W(formated_address);
+        }
+        var word3 = /\b([0-9]+[A-Z]+)\s\1\b/;
+        if (word3.test(formated_address)){
+            formated_address=removeDup(formated_address);
         }
     }
     

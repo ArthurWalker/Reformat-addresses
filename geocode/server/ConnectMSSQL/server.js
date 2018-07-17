@@ -37,17 +37,44 @@ app.get('/',function(req,res) {
         var request = new sql.Request();
 
         // query (MPRN address) to the database and get the records
-        var query = 'select MPRN_Address from TD_MPRN_GUID_LINK';
+        var query = 'select MPRN_Address,MPRNSource from TD_MPRN_GUID_LINK';
         request.query(query, function (err,result) {
             if (err) {console.log(err);}
             else{
                 //res.send(result.recordset);
-                console.log(result.recordset);
+                result.recordset.forEach(address => {
+                    listLongName(address.MPRN_Address,address.MPRNSource);
+                });
+                //toCVS
+                //Make CVS file and download
+                var toCSV=require('./functions/toCSV');
+                
+                toCSV(dict,null); 
+
+                res.send(dict);
             }
             sql.close();
         });
 
     });
+    var dict={};
+    var list_word_in_dict=[];
+    var listLongName=function(address,source){
+        if (address!=null)
+        {
+            address=address.replace(/[\s\s,.]+/g,' ');
+            list_word_in_dict=address.split(" ");
+            if (dict[source]==null){
+                dict[source]=[];
+            }
+            list_word_in_dict.forEach(word => {
+                if (word.length >= 18 && !dict[source].includes(word)){
+                   dict[source].push(word);
+                }
+            });
+        }
+    }
+
 });
 
 var server = app.listen(5000,function () {
