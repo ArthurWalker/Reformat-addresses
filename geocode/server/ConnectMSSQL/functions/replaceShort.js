@@ -1,6 +1,6 @@
 var replaceShort=function(formated_address){
     // Replace: ST -> STREET
-    formated_address=formated_address.replace(/\sST\b/g,' STREET');
+    // formated_address=formated_address.replace(/\sST\b/g,' STREET');
     // Replace: APT -> APARTMENT
     formated_address=formated_address.replace(/\bAPT\b/g,'APARTMENT');
     // Replace: APT -> RD

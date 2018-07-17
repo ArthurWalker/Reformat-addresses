@@ -4,12 +4,6 @@ var http = require('http');
 
 app.get('/',function(req,res) {
 
-    
-    // res.setHeader('Content-Type', 'text/html');
-    // res.setHeader('X-Foo', 'bar');
-    // res.writeHead(200, { 'Content-Type': 'text/plain' });
-
-
     var sql = require("mssql");
 
     var all_addresses= "";
@@ -22,13 +16,11 @@ app.get('/',function(req,res) {
         database:'OPEN_DATA'
     };
 
-    //this statement tells the browser what type of data is supposed to download and force it to download
-
     // connect to your database
     sql.connect(config,function(err) {
         if (err) {
-            console.log(err);}
-    
+            console.log(err);
+        }
         // create request object
         var request = new sql.Request();
         // query (MPRN address) to the database and get the records
@@ -41,7 +33,8 @@ app.get('/',function(req,res) {
                 result.recordset.forEach(address => {
                     executeEachAddres(address.MPRN_Address);
                 });
-    // Statistic purpose:
+
+            // Statistic purpose:
                 // Count occurences with an array format including sortable which is word_occurences[0]) and dictionary which is word_occurences[1])
                 var count_unique_part=require('./functions/count_unique_part');
                 var word_occurences=count_unique_part(all_addresses);
@@ -59,10 +52,10 @@ app.get('/',function(req,res) {
                 const data2 =occurences_table_with_length_word;
                 //toCSV(data1,data2);
                 
-                toCSV(results,null); //Put formated addresses into file
+                //toCSV(results,null); //Put formated addresses into file
 
 
-                res.send(JSON.stringify(occurences_table_with_length_word));
+                res.send(JSON.stringify(data2));
             }
             sql.close();
         });
@@ -73,13 +66,11 @@ app.get('/',function(req,res) {
     var lookFor =require('./functions/lookFor');
     var new_address;
     var executeEachAddres = function(address){
-        //lookFor("",address);
-        new_address=format_address(address);
-        results.push([address,new_address]);
+        new_address=format_address(address); // to execute each address
+        results.push([address,new_address]); // to put into files to download
         all_addresses+=new_address+ " "; // to find unique address
         lookFor("   => ",new_address);
     }
- //   res.end();
 });
 
 var server = app.listen(5000,function () {
