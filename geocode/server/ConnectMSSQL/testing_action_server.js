@@ -52,10 +52,10 @@ app.get('/',function(req,res) {
                 const data2 =occurences_table_with_length_word;
                 //toCSV(data1,data2);
                 
-                toCSV(results,null); //Put formated addresses into file
+                //toCSV(results,null); //Put formated addresses into file
 
 
-                res.send(JSON.stringify(data2));
+                res.send(JSON.stringify(data2["3"]));
             }
             sql.close();
         });
@@ -69,7 +69,7 @@ app.get('/',function(req,res) {
         new_address=format_address(address); // to execute each address
         results.push([address,new_address]); // to put into files to download
         all_addresses+=new_address+ " "; // to find unique address
-        //lookFor("   => ",new_address);
+        lookFor("   => ",new_address);
     }
 });
 

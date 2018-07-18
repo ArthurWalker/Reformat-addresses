@@ -21,42 +21,35 @@ var format_address = function(address){
         var replaceShort=require('./replaceShort');
         formated_address=replaceShort(formated_address);
 
-    //RULE : Seperate all alphnumeric words
+    //RULE : Seperate all nums+words terms
         // var seperateAlNum=require('./seperateAlNum');
         // if (/\b[0-9]+[A-Z]+\b/.test(formated_address)){
         //     formated_address= seperateAlNum(formated_address);
         // }
 
         //Note: still this one     
-        //+ var word = /([A-Z][0-9])/;
-        //+ D<num> can be coincedence with Room's number with Dublin region.
         //+ Remove long names
+        //+ ST: Saint or Street
 
     //RULE: Formating: remove all single letters
         //formated_address=formated_address.replace(/\b[A-Z]\b/g,'');
+       
+
+    // RULE: D<num> for Dublin <num> not room before duplicates
+        var removeD_num=require('./removeD_num');
+        formated_address=removeD_num(formated_address);
 
     //RULE: Formating: remove all duplicate words standing together
-        var removeDup=require('./removeDup');
-        var word =/\b([A-Z]+)\s+\1\b/;
-        if (word.test(formated_address)){
-            formated_address=removeDup(formated_address);
-        }
-        var removeDup_Dub=require('./removeDup_Dub');
-        var sperateLet_Num=require('./sperateLet_Num');
-        var word2 =/\b([A-Z]+)\s([0-9]+)(\s\1\s\2)+\b/;
-        if (word2.test(formated_address)){
-            formated_address=removeDup_Dub(formated_address);
-            formated_address=sperateLet_Num(formated_address);
-        }
-        var d6W=/\b[A-Z]+6W\b/;
-        var remove6W=require('./remove6W');
-        if (d6W.test(formated_address)){
-            formated_address=remove6W(formated_address);
-        }
-        var word3 = /\b([0-9]+[A-Z]+)\s\1\b/;
-        if (word3.test(formated_address)){
-            formated_address=removeDup(formated_address);
-        }
+        var removeGlobal = require('./removeGlobal');
+        formated_address=removeGlobal(formated_address);
+
+    // RULE: D<num> for Dublin <num> not room after duplicates
+        formated_address=removeD_num(formated_address);
+    //RULE: Formating: remove all duplicate words standing together after reduce D<num>
+        formated_address=removeGlobal(formated_address);
+    //RULE: Formating long names
+        var long_names=require('./long_names');
+       //formated_address=long_names(formated_address);
     }
     
     formated_address=formated_address.toUpperCase();

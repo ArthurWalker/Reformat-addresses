@@ -4,10 +4,13 @@ var lookFor = function(sentence,address){
     
     //var word = /[\/\\\(\)\|\?\[\].,!'@#~*=_+^%$&`*":\-;<>]+/;
     //var word =/\b([A-Z]+)\s+\1\b/; // search duplicate words in javascript
-    //var word = /\b([A-Z]+)\s([0-9]+)(\s\1\s\2)+\b/;// search duplicate terms including word+num
-    var word = /([0-9]+[A-Z]+)|([A-Z]+[0-9]+)/; // search char+digit or digit+char
+    var word = /\b([A-Z]+)\s([0-9]+)(\s\1\s\2)+\b/;// search duplicate terms including word+num
+    //var word = /([0-9]+[A-Z]+)|([A-Z]+[0-9]+)/; // search char+digit or digit+char
     //var word = /\b([0-9]+[A-Z]+)\s\1\b/;//search for <num><world>
     //var word = /\b([A-Z]+[0-9]+)\s\1\b/;// search for <word><num>
+    //var word =/\bAPTS\b/; // search for shortcut word APTS
+    //var word =/\bD[0-9]+\b/;// search for D<num>
+    
     if (address!=null && word.test(address.toUpperCase())){
         console.log(sentence+" "+address);
     }
