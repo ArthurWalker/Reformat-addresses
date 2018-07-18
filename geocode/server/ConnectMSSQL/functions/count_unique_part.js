@@ -14,16 +14,16 @@ var count_unique_part = function (addresses) {
         //console.log(key, value);
     }
 
-    var sortable=[];
-    for( var word in dict){
-        sortable.push([word,dict[word]]);
+    var sortable = [];
+    for (var word in dict) {
+        sortable.push([word, dict[word]]);
     }
 
-    sortable.sort(function(a,b){
-        return b[1]-a[1];
+    sortable.sort(function (a, b) {
+        return b[1] - a[1];
     });
-    
-    return [sortable,dict];
+
+    return [sortable, dict];
     // 2nd way to return 2 results at once
     //return {
     //    dict:dict,

@@ -1,4 +1,4 @@
-var long_names=function(address){
+var long_names = function (address) {
 
 }
 
