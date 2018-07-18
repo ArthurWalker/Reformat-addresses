@@ -6,16 +6,12 @@ var format_address = function (address) {
         //RULE: remove the first space and the last space
         address = address.trim();
 
-        // RULE: list of different county
-        var list_county = require('./county');
-        var dict_county = list_county(formated_address);
-
         //RULE: Add Ireland at the end of each address    
         formated_address = address + " Ireland";
         formated_address = formated_address.toUpperCase();
 
         //RULE: Formating: replace special characters and big gap -> 1 space
-        formated_address = formated_address.replace(/[\s\/\\\(\)\|\?\[\].,!'@#~*=_+^%$&`*":\-;<>]+/g, ' ');
+        formated_address = formated_address.replace(/[\s\/\\\(\)\|\?\[\].,!\'@#~*=_+^%$&`*":\-;<>]+/g, ' ');
 
         //RULE: Replace County
         var replaceCounty = require('./replaceCounty');
@@ -34,6 +30,7 @@ var format_address = function (address) {
         //Note: still this one     
         //+ Remove long names
         //+ ST: Saint or Street
+        //+ Remove: duplicate long terms
 
         //RULE: Formating: remove all single letters
         //formated_address=formated_address.replace(/\b[A-Z]\b/g,'');
@@ -56,7 +53,6 @@ var format_address = function (address) {
         //RULE: Formating long names
         var long_names = require('./long_names');
         //formated_address=long_names(formated_address);
-
 
     }
 

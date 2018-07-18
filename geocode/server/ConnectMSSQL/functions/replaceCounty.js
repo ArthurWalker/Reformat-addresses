@@ -53,9 +53,11 @@ var replaceCounty = function (formated_address) {
         formated_address = formated_address.replace(/\sAM\b/g, ' ANTRIM');
         // Formating Roscommon: RN
         formated_address = formated_address.replace(/\sRN\b/g, ' ROSCOMMON');
-        // Formating Roscommon: TE
+        // Formating TYRONE: TE
         formated_address = formated_address.replace(/\sTE\b/g, ' TYRONE');
-
+        // Formating Tipperary: TP
+        formated_address = formated_address.replace(/\sTP\b/g, ' TIPPERARY');
+        
         // Formating CO -> County and remove it
         formated_address = formated_address.replace(/\sCO\b/g, ' COUNTY');
         formated_address = formated_address.replace(/\sCOUNTY\b/g, '');
