@@ -3,18 +3,18 @@ var app = express();
 var http = require('http');
 
 // creating server
-var server = http.createServer(function (req,res){
-    if (req.url =='/'){
-        // check the URL of the current request
-        // set resonse header
-        res.writeHead(200,{'Content-Type':'text/html'});
-        // set response content
-        res.write('<html><body><p>This is the homepage </p></body></html>');
-        res.end();
-    }else {
-        res.end('Invalid Request');
-    }
-})
+// var server = http.createServer(function (req,res){
+//     if (req.url =='/'){
+//         // check the URL of the current request
+//         // set resonse header
+//         res.writeHead(200,{'Content-Type':'text/html'});
+//         // set response content
+//         res.write('<html><body><p>This is the homepage </p></body></html>');
+//         res.end();
+//     }else {
+//         res.end('Invalid Request');
+//     }
+// })
 
 
 app.get('/',function(req,res) {
@@ -42,6 +42,7 @@ app.get('/',function(req,res) {
             if (err) {console.log(err);}
             else{
                 //res.send(result.recordset);
+                console.log(" Running ");
                 result.recordset.forEach(address => {
                     listLongName(address.MPRN_Address,address.MPRNSource);
                 });
@@ -49,13 +50,12 @@ app.get('/',function(req,res) {
                 //Make CVS file and download
                 var toCSV=require('./functions/toCSV');
                 
-                toCSV(dict,null); 
+                //toCSV(dict,null); 
 
-                res.send(dict);
+                //res.send(dict);
             }
             sql.close();
         });
-
     });
     var dict={};
     var list_word_in_dict=[];

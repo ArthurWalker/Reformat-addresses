@@ -5,7 +5,7 @@ var http = require('http');
 app.get('/', function (req, res) {
 
     var sql = require("mssql");
-
+    var run_count=0;
     var all_addresses = "";
     var list_results = [["Original Addresses", "Formated Addresses"]]; // create columns
     var dict_results={};
@@ -34,6 +34,9 @@ app.get('/', function (req, res) {
             if (err) { console.log(err); }
             else {
                 //res.send(result.recordset);
+                run_count+=1;
+                console.log("===========> Nums of running times: "+run_count);
+                console.log(req.url);
                 console.log("===========> Executing each address...")
                 result.recordset.forEach(address => {
                     executeEachAddres(address.MPRN_Address);
@@ -53,21 +56,20 @@ app.get('/', function (req, res) {
                 // table 2: the length of words:  occurences_table_with_length_word
                 var occurences_table_with_length_word = summary(word_occurences[0])[1];
                 
-                console.log("===========> Making CSV...");
-                //Make CVS file and download
-                var toCSV = require('./functions/toCSV');
+                // Compare unique parts with addresses
                 const data1 = occurences_table_with_num;
                 const data2 = occurences_table_with_length_word;
-
-                //toCSV(data1, null); //Put formated addresses into file
-
-                // Compare unique parts with addresses
                 console.log("===========> Comparing...");
                 var uni_occu = require('./functions/uni_occ');
                 uni_occu(dict_results,data1);
-                //console.log(data1);
-                console.log("===========> Finished !");
+
+                //Make CVS file and downloadx
+                console.log("===========> Making CSV...");
+                var toCSV = require('./functions/toCSV');
+                toCSV(list_results, null); //Put formated addresses into file
                 //res.send(JSON.stringify(data2));
+                
+                console.log("===========> Finished !");
             }
             sql.close();
         });
@@ -81,13 +83,6 @@ app.get('/', function (req, res) {
         new_address = format_address(address); // to execute each address
         list_results.push([address, new_address]); // list of resukts -> to put into files to download
         dict_results[address]=new_address;  // dictionary of results
-        // var list_word=new_address.split(" ");
-        // var no_first_num_address = list_word.slice(1,).join(" ");
-        // if (list_word[list_word.length-2] in dict_counties){
-        //     dict_counties[list_word[list_word.length-2]].push(no_first_num_address);// put into dict_counties
-        // }else{
-        //     dict_counties["UNDEFINED"].push(no_first_num_address);
-        // }
         all_addresses += new_address + " "; // to find unique address
         //lookFor("   => ", new_address);
     }
