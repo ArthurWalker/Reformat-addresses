@@ -10,7 +10,8 @@ var lookFor = function (sentence, address) {
     //var word = /\b([A-Z]+[0-9]+)\s\1\b/;// search for <word><num>
     //var word =/\bAPTS\b/; // search for shortcut word APTS
     //var word =/\bD[0-9]+\b/;// search for D<num>
-    var word = /\bST\b/; // search for ST (can be misunderstanding)
+    //var word = /\bST\b/; // search for ST (can be misunderstanding)
+    var word = /\bDUBLIN[0-9]+\b/
     if (address != null && word.test(address.toUpperCase())) {
         console.log(sentence + " " + address);
     }

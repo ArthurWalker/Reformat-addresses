@@ -7,7 +7,7 @@ var format_address = function (address) {
         address = address.trim();
 
         //RULE: Add Ireland at the end of each address    
-        formated_address = address + " Ireland";
+        formated_address = address + " IRELAND";
         formated_address = formated_address.toUpperCase();
 
         //RULE: Formating: replace special characters and big gap -> 1 space
@@ -29,7 +29,6 @@ var format_address = function (address) {
 
         //Note: still this one     
         //+ Remove long names
-        //+ ST: Saint or Street
         //+ Remove: duplicate long terms
 
         //RULE: Formating: remove all single letters
@@ -50,6 +49,10 @@ var format_address = function (address) {
         //RULE: Formating: remove all duplicate words standing together after reduce D<num>
         formated_address = removeGlobal(formated_address);
 
+        //RULE: Remove duplicate long terms
+        var remove_dup_long_term = require('./remove_dup_long_term');
+        remove_dup_long_term(formated_address);
+
         //RULE: Formating long names
         var long_names = require('./long_names');
         //formated_address=long_names(formated_address);
@@ -57,6 +60,7 @@ var format_address = function (address) {
     }
 
     formated_address = formated_address.toUpperCase();
+    formated_address = formated_address.trim();
     return formated_address;
 }
 

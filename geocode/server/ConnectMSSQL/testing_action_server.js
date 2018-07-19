@@ -89,7 +89,7 @@ app.get('/', function (req, res) {
         //     dict_counties["UNDEFINED"].push(no_first_num_address);
         // }
         all_addresses += new_address + " "; // to find unique address
-        lookFor("   => ", new_address);
+        //lookFor("   => ", new_address);
     }
 });
 
