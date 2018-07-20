@@ -39,6 +39,7 @@
     "material-ui": "^0.20.1",
     "mkdirp": "^0.5.1",
     "mongodb": "^3.1.1",
+    "morgan": "^1.9.0",
     "mssql": "^4.1.0",
     "path": "^0.12.7",
     "react": "^16.4.1",
@@ -49,6 +50,7 @@
     "reloadify": "^0.2.2",
     "request": "^2.87.0",
     "sendevent": "^1.0.5",
+    "serve-favicon": "^2.5.0",
     "sharp": "^0.20.5",
     "style-loader": "^0.21.0",
     "stylus": "^0.54.5",
@@ -60,7 +62,7 @@
     "webpack": "^3.11.0"
   },
   "scripts": {
-    "start": "node ./server/ConnectMSSQL/testing_action_server.js",
+    "start": "node ./server/testing_action_server.js",
     "devstart": "nodemon ./bin/www",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
