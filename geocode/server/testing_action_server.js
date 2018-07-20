@@ -6,7 +6,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var path = require('path');
-var PORT = process.env.PORT ||5000;
+var PORT = process.env.PORT || 5000;
 
 // Settting the view (template) engine
 // Setting the 'views'value to specify the folder where the templates will be stored -> folder/views
@@ -15,7 +15,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
 
-// Middleware is any number of functions that are invoked by the express.js routing layer before your
+// Middleware(actions or functions with "use") is any number of functions that are invoked by the express.js routing layer before your
 // final request handler is and thus sits in the middle between a rwa request and the final intendedd route.
 // It basically lets you configure how your express applcation works.
 
@@ -24,46 +24,40 @@ app.set('view engine', 'pug');
 // app.use(favicon(path.join(__dirname,'public','favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended:false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname,'public')));
-// Done setting up Middleware
+app.use(express.static(path.join(__dirname, 'public')));
+// Done setting up general Middleware
 
 // To use router module in our main app, first we require() the route module 
 // then we call use() on the express applciation to add the Router to the middleware handling path,
 // specifying an URL
 
 // Import files containing codes for handling particular sets of related "routes" ("URL paths")
-var wiki = require('./routes/wiki');
-// var doit = require('./routes/doit');
-app.use('/',wiki);
-app.use('/about',wiki);
-app.use('/doit',wiki);
+var start = require('./routes/start');
+app.use('/', start);
+// app.use('/about', start);
 
 // Catch 404 and forward to erro handler
-app.use(function(req,res,next){
-    var err =new Error('Not Found');
-    err.status=404;
+app.use(function (req, res, next) {
+    var err = new Error('Not Found');
+    err.status = 404;
     next(err);
 });
 
 // Error handler
-app.use(function(err,req,res,next){
-    //set locals, only providing error in development
-    res.locals.message = err.message;
-    res.locals.error = req.app.get('env')==='development' ? err :{};
+// app.use(function (err, req, res, next) {
+//     //set locals, only providing error in development
+//     res.locals.message = err.message;
+//     res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-    // render the error page
-    res.status(err.status || 500);
-    res.sender('error');
-});
-
-// req: it is the url
-// res: the function tells express what to send back to the person making the request
-
+//     // render the error page
+//     res.status(err.status || 500);
+//     res.sender('error');
+// });
 
 app.listen(PORT, function () {
     console.log('Node.js web server at port 5000 is running ...');
 });
 
-module.exports=app;
+module.exports = app;
