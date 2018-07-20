@@ -74,6 +74,12 @@ var remove_dup_long_term = function (formated_address) {
             if (/\b(([0-9]+|[A-Z]+)\s[A-Z]+\s[A-Z]+\s[A-Z]+\s[A-Z]+\s[A-Z]+\s[A-Z]+\s([A-Z]+|[0-9]+)\s)\1\b/.test(formated_address)) {
                 formated_address = formated_address.replace(/\b(([0-9]+|[A-Z]+)\s[A-Z]+\s[A-Z]+\s[A-Z]+\s[A-Z]+\s[A-Z]+\s[A-Z]+\s([A-Z]+|[0-9]+)\s)\b/, "");
             }
+        }else if (/\b(([0-9]+|[A-Z]+)\s[A-Z]+\s[A-Z]+\s[A-Z]+\s6W\s)\1\b/.test(formated_address)) {
+            //console.log("   => 1<num> 7<word> (1<num>)");
+            formated_address = formated_address.replace(/\b(([0-9]+|[A-Z]+)\s[A-Z]+\s[A-Z]+\s[A-Z]+\s[A-Z]+\s[A-Z]+\s[A-Z]+\s([A-Z]+|[0-9]+)\s)\b/, "");
+            if (/\b(([0-9]+|[A-Z]+)\s[A-Z]+\s[A-Z]+\s[A-Z]+\s[A-Z]+\s[A-Z]+\s[A-Z]+\s([A-Z]+|[0-9]+)\s)\1\b/.test(formated_address)) {
+                formated_address = formated_address.replace(/\b(([0-9]+|[A-Z]+)\s[A-Z]+\s[A-Z]+\s[A-Z]+\s[A-Z]+\s[A-Z]+\s[A-Z]+\s([A-Z]+|[0-9]+)\s)\b/, "");
+            }
         }
     }
 

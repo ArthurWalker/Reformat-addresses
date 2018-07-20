@@ -3,6 +3,15 @@ var replaceCounty = function (formated_address) {
         //formated_address.split(' DB ').join(' Dublin ');
         formated_address = formated_address.replace(/\sDB\b/g, ' DUBLIN');
         formated_address = formated_address.replace(/\sDL\b/g, ' DUBLIN');
+        formated_address = formated_address.replace(/\sDUBLN\b/g, ' DUBLIN');
+        formated_address = formated_address.replace(/\sDUBIN\b/g, ' DUBLIN');
+        formated_address = formated_address.replace(/\b6\sW\b/g, '6W');
+        formated_address = formated_address.replace(/\b6\sWEST\b/g, '6W');
+        while (/\bDUBLIN[0-9]+\b/.test(formated_address)) {
+                var posi = formated_address.search(/\bDUBLIN[0-9]+\b/);
+                formated_address=formated_address.substring(0,posi+6)+" "+formated_address.substring(posi+6,);
+        }
+
         // Formating Kilkenny: KK
         formated_address = formated_address.replace(/\sKK\b/g, ' KILKENNY');
         // Formating Kildare: KE
@@ -57,7 +66,7 @@ var replaceCounty = function (formated_address) {
         formated_address = formated_address.replace(/\sTE\b/g, ' TYRONE');
         // Formating Tipperary: TP
         formated_address = formated_address.replace(/\sTP\b/g, ' TIPPERARY');
-        
+
         // Formating CO -> County and remove it
         formated_address = formated_address.replace(/\sCO\b/g, ' COUNTY');
         formated_address = formated_address.replace(/\sCOUNTY\b/g, '');

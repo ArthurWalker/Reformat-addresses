@@ -24,10 +24,10 @@ var format_address = function (address) {
         formated_address = replaceShort(formated_address);
 
         //RULE : Seperate all nums+words terms
-        // var seperateAlNum=require('./seperateAlNum');
-        // if (/\b[0-9]+[A-Z]+\b/.test(formated_address)){
-        //     formated_address= seperateAlNum(formated_address);
-        // }
+        var seperateAlNum=require('./seperateAlNum');
+        if (/\b[0-9]+[A-Z]{4,}\b/.test(formated_address)){
+            formated_address= seperateAlNum(formated_address);
+        }
 
         //Note: still this one     
         //+ Remove long names
