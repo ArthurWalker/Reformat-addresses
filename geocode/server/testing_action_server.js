@@ -36,7 +36,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Import files containing codes for handling particular sets of related "routes" ("URL paths")
 var start = require('./routes/start');
 app.use('/', start);
-// app.use('/about', start);
+app.use('/check', start);
 
 // Catch 404 and forward to erro handler
 app.use(function (req, res, next) {

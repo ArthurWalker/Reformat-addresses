@@ -17,6 +17,6 @@ var uni_occ = function(dict_results,data1){
         }
     });
     console.log("There are "+count_len+" addresses whose words are more than 30 characters ")
-    console.log("There are "+count_occ+" words which repeats less than 5 times");
+    console.log("There are "+count_occ+" words in each address which repeats less than 2 times");
 }
 module.exports=uni_occ;
