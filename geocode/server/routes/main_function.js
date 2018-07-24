@@ -1,14 +1,16 @@
 var sql = require("mssql");
 
-var main_function = function(req,res,config){
+//var list_results = [["MPRN","Original Addresses", "Formated Addresses"]]; // create columns
+var list_results = [];
+var main_function = function (req, res, config) {
     var all_addresses = "";
-    var list_results = [["MPRN","Original Addresses", "Formated Addresses"]]; // create columns
-    var dict_results={};
+
+    var dict_results = {};
     //var dict_counties = require('./dict_counties');     //Create list of different county
 
     // connect to your database
     //5.
-    sql.connect(config,function (err) {
+    sql.connect(config, function (err) {
         if (err) {
             console.log(err);
         }
@@ -24,7 +26,7 @@ var main_function = function(req,res,config){
                 //console.log(req.url);
                 console.log("===========> Executing each address...")
                 result.recordset.forEach(address => {
-                    executeEachAddres(address.MPRN,address.MPRN_Address);
+                    executeEachAddres(address.MPRN, address.MPRN_Address);
                 });
 
                 // Statistic purpose:
@@ -46,18 +48,16 @@ var main_function = function(req,res,config){
                 const data2 = occurences_table_with_length_word;
                 console.log("===========> Comparing...");
                 var uni_occu = require('../functions_MAIN_FUNCTION/uni_occ');
-                uni_occu(dict_results,data1);
+                uni_occu(dict_results, data1);
 
                 //Make CVS file and downloadx
                 console.log("===========> Making CSV...");
                 var toCSV = require('../functions_MAIN_FUNCTION/toCSV');
-                toCSV(list_results, null); //Put formated addresses into file
-                
+                //toCSV(list_results, null); //Put formated addresses into file
+
                 // Create View in database
-                               
 
-
-                res.send(JSON.stringify(data2));
+                res.send("Done executing MPRN addresses");
 
                 console.log("===========> Finished !");
             }
@@ -69,13 +69,14 @@ var main_function = function(req,res,config){
     var format_address = require('../functions_MAIN_FUNCTION/format_address');
     var lookFor = require('../functions_MAIN_FUNCTION/lookFor');
     var new_address;
-    var executeEachAddres = function (MPRN,address) {
+    var executeEachAddres = function (MPRN, address) {
         new_address = format_address(address); // to execute each address
-        list_results.push([MPRN,address, new_address]); // list of resukts -> to put into files to download
-        dict_results[address]=new_address;  // dictionary of results
+        list_results.push([MPRN, address, new_address]); // list of resukts -> to put into files to download
+        dict_results[address] = new_address;  // dictionary of results
         all_addresses += new_address + " "; // to find unique address
         //lookFor("   => ", new_address);
     }
 };
 
 module.exports = main_function;
+module.exports.list_results = list_results;
