@@ -63,10 +63,11 @@
     "webpack": "^3.11.0"
   },
   "scripts": {
-    "start": "node ./server/testing_action_server.js",
+    "start": "nodemon ./server/testing_action_server.js",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint server"
   },
   "devDependencies": {
     "eslint": "^5.1.0",

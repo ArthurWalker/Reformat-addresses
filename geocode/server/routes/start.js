@@ -12,12 +12,12 @@ var checking_database=require('./checking_database');
 router.get('/', function (req, res) {
     // Go to views/index.pug
     //res.render('index', { title: 'Hey', message: 'Hello there!' })
-    main_function(req, res, config.configOPEN_DATA);
+    main_function(req, res,config.configOPEN_DATA);
 })
 
 // About page route.
 router.get('/check', function (req, res) {
-    checking_database(req, res, config.configGeoDirectory);
+    checking_database(req, res,config.configGeoDirectory);
 })
 
 
