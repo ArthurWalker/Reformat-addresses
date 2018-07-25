@@ -5,7 +5,7 @@ var join_remove = function(element){
     }
     var list_word= address.split(" ");
     address = list_word.slice(0,list_word.length-1).join(" ");
-    return [element.BUILDING_ID,address];
+    return [element.BUILDING_ID,element.ADDRESS_POINT_ID,address];
 }
 
 module.exports = join_remove;

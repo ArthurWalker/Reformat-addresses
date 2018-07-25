@@ -1,10 +1,10 @@
 var sql = require("mssql");
 
-//var list_results = [["MPRN","Original Addresses", "Formated Addresses"]]; // create columns
-var list_results = [];
+
 var main_function = function (req, res, config) {
     var all_addresses = "";
-
+    //var list_results = [["MPRN","Original Addresses", "Formated Addresses"]]; // create columns
+    var list_results = [];
     var dict_results = {};
     //var dict_counties = require('./dict_counties');     //Create list of different county
 
@@ -53,7 +53,7 @@ var main_function = function (req, res, config) {
                 //Make CVS file and downloadx
                 console.log("===========> Making CSV...");
                 var toCSV = require('../functions_MAIN_FUNCTION/toCSV');
-                //toCSV(list_results, null); //Put formated addresses into file
+                toCSV(list_results, null); //Put formated addresses into file
 
                 // Create View in database
 
@@ -79,4 +79,3 @@ var main_function = function (req, res, config) {
 };
 
 module.exports = main_function;
-module.exports.list_results = list_results;
