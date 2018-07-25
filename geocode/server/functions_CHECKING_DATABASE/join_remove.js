@@ -1,5 +1,5 @@
 var join_remove = function(element){
-    var address= element.ADDR_LINE_1+" "+element.ADDR_LINE_2+" "+element.ADDR_LINE_3+" "+element.ADDR_LINE_4+" "+element.ADDR_LINE_5+" "+element.ADDR_LINE_6+" "+element.ADDR_LINE_7+" "+element.ADDR_LINE_8+" "+element.ADDR_LINE_9+" "+element.ADDR_LINE_10;
+    var address= element.ADDRESS_LINE;
     if (/\bnull\b/.test(address)){
         address = address.replace(/\b\snull\b/g,"");
     }

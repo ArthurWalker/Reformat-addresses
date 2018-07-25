@@ -1,7 +1,12 @@
 var sql = require("mssql");
+var config = require('../database');
+var readline = require('readline');
 
+// CHecking numbers of rows in the databse
+var show_rows = require('../functions_MAIN_FUNCTION/show_rows');
+var total_rows = show_rows();
 
-var main_function = function (req, res, config) {
+var main_function = function (req, res) {
     var all_addresses = "";
     //var list_results = [["MPRN","Original Addresses", "Formated Addresses"]]; // create columns
     var list_results = [];
@@ -9,8 +14,7 @@ var main_function = function (req, res, config) {
     //var dict_counties = require('./dict_counties');     //Create list of different county
 
     // connect to your database
-    //5.
-    sql.connect(config, function (err) {
+    sql.connect(config.configOPEN_DATA, function (err) {
         if (err) {
             console.log(err);
         }
@@ -18,7 +22,7 @@ var main_function = function (req, res, config) {
         var request = new sql.Request();
         // query (MPRN address) to the database and get the records
         var query = 'select MPRN, MPRN_Address from TD_MPRN_GUID_LINK';
-
+        var progress_count = 0;
         request.query(query, function (err, result) {
             if (err) { console.log(err); }
             else {
@@ -27,6 +31,11 @@ var main_function = function (req, res, config) {
                 console.log("===========> Executing each address...")
                 result.recordset.forEach(address => {
                     executeEachAddres(address.MPRN, address.MPRN_Address);
+                    // Show progression
+                    readline.clearLine(process.stdout, 0);
+                    readline.cursorTo(process.stdout, 0);
+                    progress_count += 1;
+                    process.stdout.write(progress_count + "/" + total_rows + "   ==> " + Number(total_rows / 907088 * 100).toFixed(2) + "%\n");
                 });
 
                 // Statistic purpose:
@@ -53,9 +62,7 @@ var main_function = function (req, res, config) {
                 //Make CVS file and downloadx
                 console.log("===========> Making CSV...");
                 var toCSV = require('../functions_MAIN_FUNCTION/toCSV');
-                toCSV(list_results, null); //Put formated addresses into file
-
-                // Create View in database
+                //toCSV(list_results, null); //Put formated addresses into file
 
                 res.send("Done executing MPRN addresses");
 
@@ -74,6 +81,9 @@ var main_function = function (req, res, config) {
         list_results.push([MPRN, address, new_address]); // list of resukts -> to put into files to download
         dict_results[address] = new_address;  // dictionary of results
         all_addresses += new_address + " "; // to find unique address
+        // Create Table in database
+        var insert_table = require('../functions_MAIN_FUNCTION/insert_table')
+        insert_table([MPRN, address, new_address]);
         //lookFor("   => ", new_address);
     }
 };
