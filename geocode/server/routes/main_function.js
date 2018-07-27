@@ -1,75 +1,63 @@
-var sql = require("mssql");
+var { poolPromise } = require('../database');
+var readline = require('readline');
 
-var main_function = function(req,res,config){
-    var all_addresses = "";
-    var list_results = [["Original Addresses", "Formated Addresses"]]; // create columns
-    var dict_results={};
-    //var dict_counties = require('./dict_counties');     //Create list of different county
+var main_function = async function (req, res) {
+    try {
+        //var list_results = [["MPRN","Original Addresses", "Formated Addresses"]]; // create columns
+        // CHecking numbers of rows in the databse
+        // var show_rows = require('../functions_MAIN_FUNCTION/show_rows');
+        // var total_rows = show_rows();
+        //var dict_counties = require('./dict_counties');     //Create list of different county
+        var list_results = [];
+        var dict_results = {};
+        var all_addresses = "";
+        let pool = await poolPromise;
 
-    // connect to your database
-    sql.connect(config, function (err) {
-        if (err) {
-            console.log(err);
-        }
+        // connect to your database;
         // create request object
-        var request = new sql.Request();
+        let request = await pool.request();
+        request.stream = true; // large data
         // query (MPRN address) to the database and get the records
-        var query = 'select MPRN_Address from TD_MPRN_GUID_LINK';
+        var query = 'select MPRN,MPRN_Address from [TD_MPRN_GUID_LINK]';
+        request.query(query);
 
-        request.query(query, function (err, result) {
-            if (err) { console.log(err); }
-            else {
-                //res.send(result.recordset);
-                console.log("===========> Nums of running times: ");
-                //console.log(req.url);
-                console.log("===========> Executing each address...")
-                result.recordset.forEach(address => {
-                    executeEachAddres(address.MPRN_Address);
-                });
+        // Print out COLUMNS
+        // request.on('recordset', columns => {
+        //     console.log(columns);
+        // });
+        console.log("===========> Executing each address...")
 
-                // Statistic purpose:
-                // Count occurences with an array format including sortable which is word_occurences[0]) and dictionary which is word_occurences[1])
-                console.log("===========> Counting...");
-                var count_unique_part = require('../functions/count_unique_part');
-                var word_occurences = count_unique_part(all_addresses);
+        // Executing each row
+        var progress_count = 0;
+        request.on('row', (row) => {
+            var executeEachAddress = require('../functions_MAIN_FUNCTION/executeEachAddress');
+            var new_address = executeEachAddress(row.MPRN_Address);
+            list_results.push([row.MPRN, row.MPRN_Address, new_address]); // list of resukts -> to put into files to download
+            dict_results[row.MPRN_Address] = new_address;  // dictionary of results
+            all_addresses += new_address + " "; // to find unique address
 
-                // Summary data
-                console.log("===========> Summary...");
-                var summary = require('../functions/summary');
-                // table 1: nums of ouccrences with incremental id: 
-                var occurences_table_with_num = summary(word_occurences[0])[0];
-                // table 2: the length of words:  occurences_table_with_length_word
-                var occurences_table_with_length_word = summary(word_occurences[0])[1];
-
-                // Compare unique parts with addresses
-                const data1 = occurences_table_with_num;
-                const data2 = occurences_table_with_length_word;
-                console.log("===========> Comparing...");
-                var uni_occu = require('../functions/uni_occ');
-                uni_occu(dict_results,data1);
-
-                //Make CVS file and downloadx
-                console.log("===========> Making CSV...");
-                var toCSV = require('../functions/toCSV');
-                //toCSV(list_results, null); //Put formated addresses into file
-                res.send(JSON.stringify(data2));
-
-                console.log("===========> Finished !");
-            }
-            sql.close();
+            // Show progression
+            readline.clearLine(process.stdout, 0);
+            readline.cursorTo(process.stdout, 0);
+            progress_count += 1;
+            process.stdout.write(progress_count + "/" + 908028 + "   ==> " + Number(progress_count / 908028 * 100).toFixed(2) + "%");
+        })
+        // Executing error
+        request.on('error', err => {
+            // May be emitted multiple times
+            console.log('error');
         });
-    });
 
-    // Perform with each address
-    var format_address = require('../functions/format_address');
-    var lookFor = require('../functions/lookFor');
-    var new_address;
-    var executeEachAddres = function (address) {
-        new_address = format_address(address); // to execute each address
-        list_results.push([address, new_address]); // list of resukts -> to put into files to download
-        dict_results[address]=new_address;  // dictionary of results
-        all_addresses += new_address + " "; // to find unique address
-        //lookFor("   => ", new_address);
+        request.on('done', result => {
+            // Always emitted as the last one
+            res.send("Done executing MPRN addresses");
+            // Statistic purpose:
+            var making_statistic = require('../functions_MAIN_FUNCTION/making_statistic');
+            making_statistic(all_addresses, dict_results, list_results);
+            console.log("===========> Finished !");
+        });
+    } catch (err) {
+        console.log(err);
     }
 };
 

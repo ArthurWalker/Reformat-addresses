@@ -46,6 +46,7 @@
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-scripts": "1.1.4",
+    "readline": "^1.3.0",
     "rebuild": "^0.1.2",
     "redux": "^4.0.0",
     "reloadify": "^0.2.2",
@@ -63,7 +64,7 @@
     "webpack": "^3.11.0"
   },
   "scripts": {
-    "start": "node ./server/testing_action_server.js",
+    "start": "nodemon ./server/testing_action_server.js",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
