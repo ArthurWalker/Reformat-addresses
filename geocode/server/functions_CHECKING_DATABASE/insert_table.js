@@ -3,7 +3,7 @@ var config = require('../database');
 
 var insert_table = function (new_address) {
     new sql.ConnectionPool(config.configOPEN_DATA).connect().then(function (pool) {
-        var query = "insert into PP_Match_Address (BUILDING_ID, ADDRESS_POINT_ID, ADDRESS_IN_GEO ) values ('"+new_address[0]+"','"+new_address[1]+"','"+new_address[2]+"')";
+        var query = "insert into PP_Match_Address (BUILDING_ID, ADDRESS_POINT_ID, ADDRESS_IN_GEO ) values ('"+new_address.BUILDING_ID+"','"+new_address.ADDRESS_POINT_ID+"','"+new_address.ADDRESS_LINE+"')";
         return pool.request().query(query)
     }).then(results => {
         console.log(results);
