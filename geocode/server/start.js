@@ -1,12 +1,12 @@
 var express = require('express');
 var router = express.Router();
 
-var main_function=require('./routes/main_function');
-var matching_address = require('./routes/matching_address');
-var checking_match = require('./routes/checking_match');
-var opendata = require('./routes/opendata');
-var geodata = require('./routes/geodata');
-var compare_without_db = require('./routes/compare_without_db');
+var main_function=require('./routes/withDatabase/main_function');
+var matching_address = require('./routes/withDatabase/matching_address');
+var checking_match = require('./routes/withDatabase/checking_match');
+var opendata = require('./routes/withoutDatabase/opendata');
+var geodata = require('./routes/withoutDatabase/geodata');
+var compare_without_db = require('./routes/withoutDatabase/compare_without_db');
 // req: it is the url
 // res: the function tells express what to send back to the person making the request
 

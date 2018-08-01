@@ -1,7 +1,7 @@
-var { poolPromise } = require('../database');
+var { poolPromise } = require('../globalVariable/database');
 var readline = require('readline');
-var dict_counties = require('../dict_counties');
-var count = require('../count');
+var dict_counties = require('../globalVariable/dict_counties');
+var count = require('../globalVariable/count');
 var find_match = async function (mprn, county, address) {
     try {
         let pool = await poolPromise;

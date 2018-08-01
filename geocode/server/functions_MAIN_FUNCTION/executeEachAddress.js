@@ -1,5 +1,5 @@
 // Perform with each address
-var dict_counties = require('../dict_counties');
+var dict_counties = require('../globalVariabledict_counties');
 var format_address = require('./format_address');
 var lookFor = require('./lookFor');
 var new_address;
