@@ -34,7 +34,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // specifying an URL
 
 // Import files containing codes for handling particular sets of related "routes" ("URL paths")
-var start = require('./routes/start');
+var start = require('./start');
 app.use('/', start);
 // app.use('/about', start);
 

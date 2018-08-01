@@ -4,10 +4,10 @@ const dbConfigOpenData = {
     password: 'zHbF6cK8gzkCR6yKAnMF',
     server: '172.17.0.237', //SEAIREPORTSTG01
     database: 'OPEN_DATA',
-    requestTimeout: 300000,
-    connectionTimeout :300000,
+    requestTimeout: 900000,
+    connectionTimeout :900000,
     pool: {
-        idleTimeoutMillis: 300000,
+        idleTimeoutMillis: 900000,
         max: 1000,
         min: 10,
     },

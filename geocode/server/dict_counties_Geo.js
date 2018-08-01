@@ -1,4 +1,4 @@
-var dict_counties = {
+var dict_counties_Geo = {
     "ANTRIM": {},
     "ARMAGH": {},
     "CARLOW": {},
@@ -31,7 +31,5 @@ var dict_counties = {
     "WESTMEATH": {},
     "WEXFORD": {},
     "WICKLOW": {},
-    "UNDEFINED": {},
-    "NO_WORD":{},
 };
-module.exports = dict_counties;
+module.exports = dict_counties_Geo;
