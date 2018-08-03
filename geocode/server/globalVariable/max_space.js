@@ -1,14 +1,6 @@
 var max_space = 0;
-var address =""
-module.exports= {max_space,address};
+var address ="";
+var old_address ="";
+module.exports= {max_space,address,old_address};
 
 
-// 11 SAINT MARGARET S AVENUE RAHENY DUBLIN 5
-// 11 SAINT MARGARET S AVENUE RAHENY DUBLIN 5 
-// 11 SAINT MARGARET S AVENUE RAHENY DUBLIN 5#
-
-
-
-// 16 DOUGLAS HALL LAWN WELL ROAD DOUGLAS CORK
-// 16 DOUGLAS HALL LAWN WELL ROAD DOUGLAS CORK
-// 16 DOUGLAS HALL LAWN WELL ROAD DOUGLAS CORK IRELAND

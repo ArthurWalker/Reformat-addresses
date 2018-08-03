@@ -20,6 +20,9 @@ var opendata = function (req, res) {
         })
         .on('end', function () {
             //do something wiht csvData
+            console.log();
+            var max_space = require('../../globalVariable/max_space');
+            console.log(max_space.max_space+"\n  =>>> "+max_space.old_address+"\n ==>>>"+max_space.address);
             var toCSV = require('../../functions_MAIN_FUNCTION/toCSV');
             var dup_list = require('../../globalVariable/dup_list');
             toCSV(dup_list.dup_list1_5, 'address_1_5');

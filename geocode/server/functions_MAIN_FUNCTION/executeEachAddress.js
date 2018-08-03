@@ -5,7 +5,7 @@ var lookFor = require('./lookFor');
 var new_address;
 var executeEachAddress = function (mprn,address) {
     new_address = format_address(address); // to execute each address
-    //lookFor("   => ", new_address);
+    lookFor("   => ", address, new_address);
     // put into dictionary of counties
     new_address = new_address.replace(/\b\sIRELAND\b/g, "");
     var list_word = new_address.split(" ");

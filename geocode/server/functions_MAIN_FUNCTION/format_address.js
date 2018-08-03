@@ -15,6 +15,10 @@ var format_address = function (address) {
         //RULE: Formating: replace special characters and big gap -> 1 space
         formated_address = formated_address.replace(/[\s\s\/\\\(\)\|\?\[\].,!@#~*=_+^%$&`*":\-;<>]+/g, ' ');
 
+        // RULE: Replace special cases;
+        var replace_special_case = require('./replace_special_case');
+        formated_address = replace_special_case(formated_address);
+
         //RULE: Replace County
         var replaceCounty = require('./replaceCounty');
         formated_address = replaceCounty(formated_address);

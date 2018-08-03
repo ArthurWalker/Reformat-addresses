@@ -11,6 +11,7 @@ var replaceCounty = function (formated_address) {
                 var posi = formated_address.search(/\bDUBLIN[0-9]+\b/);
                 formated_address=formated_address.substring(0,posi+6)+" "+formated_address.substring(posi+6,);
         }
+        formated_address = formated_address.replace(/\bWICLOW\b/,'WICKLOW');
 
         // Formating Kilkenny: KK
         formated_address = formated_address.replace(/\sKK\b/g, ' KILKENNY');

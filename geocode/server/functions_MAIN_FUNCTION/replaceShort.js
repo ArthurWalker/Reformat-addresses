@@ -12,6 +12,10 @@ var replaceShort = function (formated_address) {
     formated_address = formated_address.replace(/\bAPT\b/g, 'APARTMENT');
     formated_address = formated_address.replace(/\bAPTS\b/g, 'APARTMENTS');
 
+    // Replace: PK -> PARK
+    formated_address = formated_address.replace(/\bOK\b/g, 'PARK');
+
+
     // Replace: FL/FLR -> FLOOR
     if (/\b(FL)\b/.test(formated_address)||(/\bFLR\b/.test(formated_address))){
         formated_address = formated_address.replace(/\bFL\b/g, 'FLOOR');
