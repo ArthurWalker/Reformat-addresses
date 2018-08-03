@@ -2,7 +2,7 @@ var fs = require('fs');
 var parse = require('csv-parse');
 var readline = require('readline');
 
-var dict_counties_geo = require('../dict_counties_Geo');
+var dict_counties_geo = require('../../globalVariable/dict_counties_Geo');
 
 var geodata = function (req, res) {
     var progress_count_GeoDirectory_Data = 0;

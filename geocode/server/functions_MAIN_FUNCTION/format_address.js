@@ -8,12 +8,12 @@ var format_address = function (address) {
 
         //RULE: Add Ireland at the end of each address 
         formated_address = address.toUpperCase();
-        if (formated_address.indexOf("IRELAND")==-1){
-            formated_address = formated_address + " IRELAND";
-        }
+        // if (formated_address.indexOf("IRELAND")==-1){
+        //     formated_address = formated_address + " IRELAND";
+        // }
 
         //RULE: Formating: replace special characters and big gap -> 1 space
-        formated_address = formated_address.replace(/[\s\s\/\\\(\)\|\?\[\].,!\'@#~*=_+^%$&`*":\-;<>]+/g, ' ');
+        formated_address = formated_address.replace(/[\s\s\/\\\(\)\|\?\[\].,!@#~*=_+^%$&`*":\-;<>]+/g, ' ');
 
         //RULE: Replace County
         var replaceCounty = require('./replaceCounty');
@@ -52,8 +52,8 @@ var format_address = function (address) {
         formated_address = removeGlobal(formated_address);
 
         //RULE: Remove duplicate long terms
-        var remove_dup_long_term = require('./remove_dup_long_term');
-        remove_dup_long_term(formated_address);
+        var remove_dup_long_term2 = require('./remove_dup_long_term2');
+        formated_address=remove_dup_long_term2(formated_address);
 
         //RULE: Formating long names
 

@@ -1,5 +1,5 @@
-var dict_counties = require('../dict_counties');
-var dict_counties_geo = require('../dict_counties_Geo');
+var dict_counties = require('../../globalVariable/dict_counties');
+var dict_counties_geo = require('../../globalVariable/dict_counties_Geo');
 
 
 

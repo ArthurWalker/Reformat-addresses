@@ -1,4 +1,4 @@
-var dict_counties = require('../dict_counties');
+var dict_counties = require('../../globalVariable/dict_counties');
 var matching_address = async function (req, res) {
     // go through each county
     try {

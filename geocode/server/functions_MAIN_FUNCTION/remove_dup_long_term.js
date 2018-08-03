@@ -21,15 +21,20 @@ var remove_dup_long_term = function (formated_address) {
     if (count3 == list_word_occurences.length || count2 == list_word_occurences.length) {
         var new_address = [];
         var list_word = formated_address.split(" ");
-        list_word.some(function (token) {
-            if (new_address.indexOf(token) != -1) {
-                return true;
-            }
-            new_address.push(token);
-        });
+        // list_word.some(function (token) {
+        //     if (new_address.indexOf(token) != -1) {
+        //         return true;
+        //     }
+        //     new_address.push(token);
+        // });
+        var i = 0;
+        while (new_address.indexOf(list_word[i])==-1){
+            new_address.push(list_word[i]);
+            i+=1;
+        }
         formated_address = new_address.join(" ");
     }
-    else if (count2 != list_word_occurences.length && count3 != list_word_occurences.length && Number(not_count2_or3 / list_word_occurences.length * 100).toFixed(2) >= 60) {
+    else if (count2 != list_word_occurences.length && count3 != list_word_occurences.length && Number(not_count2_or3 / list_word_occurences.length * 100).toFixed(2) >= 65) {
         // console.log(dict);
         // console.log('Before: ' + Number(not_count2_or3 / Object.keys(dict).length * 100).toFixed(2) + '% dup:' + formated_address);
         if (/\b(^([0-9]+|[A-Z]+)\s[A-Z]+\s)\1\b/.test(formated_address)) {
@@ -74,7 +79,7 @@ var remove_dup_long_term = function (formated_address) {
             if (/\b(([0-9]+|[A-Z]+)\s[A-Z]+\s[A-Z]+\s[A-Z]+\s[A-Z]+\s[A-Z]+\s[A-Z]+\s([A-Z]+|[0-9]+)\s)\1\b/.test(formated_address)) {
                 formated_address = formated_address.replace(/\b(([0-9]+|[A-Z]+)\s[A-Z]+\s[A-Z]+\s[A-Z]+\s[A-Z]+\s[A-Z]+\s[A-Z]+\s([A-Z]+|[0-9]+)\s)\b/, "");
             }
-        }else if (/\b(([0-9]+|[A-Z]+)\s[A-Z]+\s[A-Z]+\s[A-Z]+\s6W\s)\1\b/.test(formated_address)) {
+        } else if (/\b(([0-9]+|[A-Z]+)\s[A-Z]+\s[A-Z]+\s[A-Z]+\s6W\s)\1\b/.test(formated_address)) {
             //console.log("   => 1<num> 7<word> (1<num>)");
             formated_address = formated_address.replace(/\b(([0-9]+|[A-Z]+)\s[A-Z]+\s[A-Z]+\s[A-Z]+\s[A-Z]+\s[A-Z]+\s[A-Z]+\s([A-Z]+|[0-9]+)\s)\b/, "");
             if (/\b(([0-9]+|[A-Z]+)\s[A-Z]+\s[A-Z]+\s[A-Z]+\s[A-Z]+\s[A-Z]+\s[A-Z]+\s([A-Z]+|[0-9]+)\s)\1\b/.test(formated_address)) {
@@ -83,7 +88,7 @@ var remove_dup_long_term = function (formated_address) {
         }
     }
 
-    formated_address = formated_address + "IRELAND";
+    //formated_address = formated_address + "IRELAND";
 
     // Checking results
     // list_word_occurences = count_unique_part(formated_address)[0];
@@ -103,11 +108,12 @@ var remove_dup_long_term = function (formated_address) {
     //         not_count2_or3++;
     //     }
     // });
-    // if (Number(not_count2_or3 / list_word_occurences.length * 100).toFixed(2) >= 65) {
+    // if (count3 == list_word_occurences.length || count2 == list_word_occurences.length) {
     //     console.log(dict);
     //     console.log("Address: " + formated_address);
     //     console.log();
     // }
+    return formated_address;
 }
 
 module.exports = remove_dup_long_term;

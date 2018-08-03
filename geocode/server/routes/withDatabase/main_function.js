@@ -1,4 +1,4 @@
-var { poolPromise } = require('../database');
+var { poolPromise } = require('../../globalVariable/database');
 var readline = require('readline');
 
 var main_function = async function (req, res) {
@@ -30,7 +30,7 @@ var main_function = async function (req, res) {
         // Executing each row
         var progress_count = 0;
         request.on('row', (row) => {
-            var executeEachAddress = require('../functions_MAIN_FUNCTION/executeEachAddress');
+            var executeEachAddress = require('../../functions_MAIN_FUNCTION/executeEachAddress');
             var new_address = executeEachAddress(row.MPRN,row.MPRN_Address);
             list_results.push([row.MPRN, row.MPRN_Address, new_address]); // list of resukts -> to put into files to download
             dict_results[row.MPRN_Address] = new_address;  // dictionary of results
@@ -48,14 +48,22 @@ var main_function = async function (req, res) {
         });
 
         request.on('done', result => {
+            console.log();
+            // var max_space = require('../../globalVariable/max_space');
+            // console.log(max_space.max_space+"  =>>> "+max_space.address);
+            var count = require('../../globalVariable/count');
+            console.log(count.dup_total);
+            var dup_list = require('../../globalVariable/dup_list');
+            var toCSV = require('../../functions_MAIN_FUNCTION/toCSV');
+           // toCSV(dup_list.dup_list1_5,'address_1_5');
+            //toCSV(dup_list.dup_list2_0,'address_2_0');
             // Always emitted as the last one
             res.send("Done executing MPRN addresses");
             // Statistic purpose:
-            var making_statistic = require('../functions_MAIN_FUNCTION/making_statistic');
+            var making_statistic = require('../../functions_MAIN_FUNCTION/making_statistic');
             //making_statistic(all_addresses, dict_results, list_results);
-            var dict_counties = require('../dict_counties');
-            // var toCSV = require('../functions_MAIN_FUNCTION/toCSV');
-            // toCSV([dict_counties['UNDEFINDED']]);
+            var dict_counties = require('../../globalVariable/dict_counties');
+            toCSV([dict_counties['UNDEFINED']],'undefined');
             console.log("===========> Finished !");
         });
     } catch (err) {

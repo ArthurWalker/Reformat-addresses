@@ -9,13 +9,13 @@ var sort = function (dict) {
     return sortable;
 }
 
-var toCSV = function (arrayOfObjects1, arrayOfObjects2) {
+var toCSV = function (arrayOfObjects1, filename) {
     //csv.write(arrayOfObjects1,{headers:true}).pipe(fs.createWriteStream('word_occurences_statistic.csv'));
     // csv.write([arrayOfObjects2],{headers:true}).pipe(fs.createWriteStream('nums_word_statistic.csv'));
     // Object.keys(arrayOfObjects2).map(function(key) {
     //     csv.write(sort(arrayOfObjects2[key]),{headers:true}).pipe(fs.createWriteStream("table_"+key+"_letters.csv"));
     // });
-    csv.write(arrayOfObjects1, { headers: true }).pipe(fs.createWriteStream('formated_addresses.csv'));
+    csv.write(arrayOfObjects1, { headers: true }).pipe(fs.createWriteStream(filename+'.csv'));
     console.log(" Done writing to CSV file");
 }
 

@@ -1,5 +1,5 @@
 // Perform with each address
-var dict_counties = require('../globalVariabledict_counties');
+var dict_counties = require('../globalVariable/dict_counties');
 var format_address = require('./format_address');
 var lookFor = require('./lookFor');
 var new_address;
@@ -15,12 +15,13 @@ var executeEachAddress = function (mprn,address) {
     if (dict_counties.hasOwnProperty(list_word[list_word.length-1])){
         dict_counties[list_word[list_word.length-1]][mprn]=[new_address];
     }else if (/\bBAILE ATHA CLIATH\b/.test(new_address)){
-        dict_counties['DUBLIN'][mprn]=[new_address];
+        dict_counties['UNDEFINED'][mprn]=[address,new_address];
     }else{
         if (new_address==""){
-            dict_counties['NO_WORD'][mprn]=[new_address];
+            dict_counties['NO_WORD'][mprn]=[address,new_address];
         }else{
-            dict_counties['UNDEFINED'][mprn]=[new_address];
+            //console.log(new_address);
+            dict_counties['UNDEFINED'][mprn]=[address,new_address];
         }
     }
     return new_address;
