@@ -18,7 +18,7 @@ var main_function = async function (req, res) {
         let request = await pool.request();
         request.stream = true; // large data
         // query (MPRN address) to the database and get the records
-        var query = 'select MPRN,MPRN_Address from [TD_MPRN_GUID_LINK]';
+        var query = 'select top 100 MPRN,MPRN_Address from [TD_MPRN_GUID_LINK]';
         request.query(query);
 
         // Print out COLUMNS
@@ -48,22 +48,13 @@ var main_function = async function (req, res) {
         });
 
         request.on('done', result => {
-            console.log();
-            // var max_space = require('../../globalVariable/max_space');
-            // console.log(max_space.max_space+"  =>>> "+max_space.address);
-            var count = require('../../globalVariable/count');
-            console.log(count.dup_total);
-            var dup_list = require('../../globalVariable/dup_list');
-            var toCSV = require('../../functions_MAIN_FUNCTION/toCSV');
-           // toCSV(dup_list.dup_list1_5,'address_1_5');
-            //toCSV(dup_list.dup_list2_0,'address_2_0');
+
             // Always emitted as the last one
             res.send("Done executing MPRN addresses");
             // Statistic purpose:
             var making_statistic = require('../../functions_MAIN_FUNCTION/making_statistic');
-            //making_statistic(all_addresses, dict_results, list_results);
-            var dict_counties = require('../../globalVariable/dict_counties');
-            toCSV([dict_counties['UNDEFINED']],'undefined');
+            making_statistic(all_addresses, dict_results, list_results);
+
             console.log("===========> Finished !");
         });
     } catch (err) {
