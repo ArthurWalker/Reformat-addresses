@@ -15,8 +15,9 @@ var toCSV = function (arrayOfObjects1, filename) {
     // Object.keys(arrayOfObjects2).map(function(key) {
     //     csv.write(sort(arrayOfObjects2[key]),{headers:true}).pipe(fs.createWriteStream("table_"+key+"_letters.csv"));
     // });
-    csv.write(arrayOfObjects1, { headers: true }).pipe(fs.createWriteStream(filename+'.csv'));
-    console.log(" Done writing to CSV file");
+    csv.write(arrayOfObjects1, { headers: true }).pipe(fs.createWriteStream(filename + '.csv')).on("finish", function () {
+        console.log(" Done writing to CSV file");
+    });;
 }
 
 module.exports = toCSV;

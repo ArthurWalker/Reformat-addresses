@@ -56,9 +56,9 @@ var geodata = function (req, res) {
             readline.cursorTo(process.stdout, 0);
             progress_count_GeoDirectory_Data += 1;
             process.stdout.write(progress_count_GeoDirectory_Data + "/" + 2202126 + "   ==> " + Number(progress_count_GeoDirectory_Data / 2202126 * 100).toFixed(2) + "%");
-            // if (progress_count_GeoDirectory_Data==10){
+            // if (progress_count_GeoDirectory_Data == 10) {
             //     s.pause();
-            //      change the function 'end' below to pause
+            //     // change the function 'end' below to 'pause'
             // }
         })
         .on('end', function () {
