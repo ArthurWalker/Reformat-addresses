@@ -16,6 +16,8 @@ var add_info_mprn = function (mprn, old_address, new_address) {
     if (dict_counties.hasOwnProperty(list_word[list_word.length - 1])) {
         list_word = list_word.slice(0, list_word.length - 1);
     }
-    info_MPRN.push([mprn, old_address, new_address, list_word_with_special_char, list_word.join(" ")]);
+    var list = [mprn, old_address, new_address].concat(list_word_with_special_char);
+    list.push(list_word.join(" "));
+    info_MPRN.push(list);
 }
 module.exports = add_info_mprn;

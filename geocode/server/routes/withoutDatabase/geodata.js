@@ -7,7 +7,7 @@ var geo_address = require('../../globalVariable/geo_address');
 var geodata = function (req, res) {
     var progress_count_GeoDirectory_Data = 0;
     //read from csv
-    var s = fs.createReadStream('../../GeoDirectoryData.csv')
+    fs.createReadStream('../../GeoDirectoryData.csv')
         .pipe(parse({ delimiter: ',' }))
         .on('data', function (row) {
             //do something with csvrow
@@ -50,7 +50,8 @@ var geodata = function (req, res) {
             //Remove COUNTY
             list_word = list_word.slice(0, list_word.length - 1);
             var address_has_no_county_and_aircode = list_word.join(" ");
-            geo_address.push([row[0], row[1], address_has_no_county_and_aircode]);
+            row.push(address_has_no_county_and_aircode);
+            geo_address.push(row);
 
             readline.clearLine(process.stdout, 0);
             readline.cursorTo(process.stdout, 0);

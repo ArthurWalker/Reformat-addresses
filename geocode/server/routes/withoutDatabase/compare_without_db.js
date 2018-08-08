@@ -1,32 +1,28 @@
-var dict_counties = require('../../globalVariable/dict_counties');
-var dict_counties_geo = require('../../globalVariable/dict_counties_Geo');
-
-
-
-var progress_count_OpenData = 0;
+var fs = require('fs');
+var match = require('../../globalVariable/match');
 var compare_without_db = function (req, res) {
-    Object.keys(dict_counties).map(key => {
-        Object.keys(dict_counties[key]).map(k => {
-            Object.keys(dict_counties_geo[key]).map(ke => {
-                if (ke.includes(dict_counties[key][k])) {
-                    dict_counties[key][k].push(ke);
-                    dict_counties[key][k].push(dict_counties_geo[key][ke]);
-                }
-                progress_count_OpenData += 1;
-                readline.clearLine(process.stdout, 0);
-                readline.cursorTo(process.stdout, 0);
-                process.stdout.write(progress_count_OpenData + "/" + 908028 + "   ==> " + Number(progress_count_OpenData / 908028 * 100).toFixed(2) + "%");
-            });
-        });
-    });
-    console.log('Done inserting. Now is printing');
-    Object.keys(dict_counties).map(key => {
-        Object.keys(dict_counties[key]).map(k => {
-            if (dict_counties[key][k].length >= 3) {
-                console.log(dict_counties[key][k]);
+  fs.readFile('../../first_several_rows.csv', (err, internFile) => {
+    fs.readFile('../../geo_address_with_county.csv', (err, externFile) => {
+      var internLines = internFile.toString().split('\n');
+      var externLines = externFile.toString().split('\n');
+      internLines.forEach(function (iLine) {
+        var ilist = iLine.split(",");
+        var iaddress = ilist[ilist.length - 1];
+        if (iaddress != undefined) {
+          externLines.forEach(function (eLine) {
+            var elist = eLine.split(",");
+            var eaddress = elist[elist.length - 1];
+            var regex = new RegExp("\\b" + iaddress + "\\b");
+            if (regex.test(eaddress)) {
+              // console.log();
+              // console.log("==>"+iaddress);
+              // console.log("=====> "+eaddress);
             }
-        })
+          })
+        }
+      })
     })
+  })
 }
 
 module.exports = compare_without_db;
