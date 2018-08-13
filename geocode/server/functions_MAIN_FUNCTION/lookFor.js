@@ -15,12 +15,12 @@ var lookFor = function (sentence, old, address) {
     //var word = /\bDUBLIN[0-9]+\b/
     //var word = /\b(([0-9]+|[A-Z]+)\s[A-Z]+\s[A-Z]+\s[A-Z]+\s[A-Z]+\s[A-Z]+\s[A-Z]+\s([A-Z]+|[0-9]+)\s)\1\b/;
     var list_word = address.split(' ');
-    var word_len = list_word.length-1;
+    var word_len = list_word.length;
     // var 
     // if (address != null && word.test(address.toUpperCase()) && /\b(([0-9]+|[A-Z]+)\s[A-Z]+\s[A-Z]+\s[A-Z]+\s[A-Z]+\s[A-Z]+\s[A-Z]+\s([A-Z]+|[0-9]+)\s)\1\b/.test(address)) {
     //     console.log(sentence + " " + address);
     // }
-    if (word_len > max_space.max_space){
+    if (word_len >= max_space.max_space){
         max_space.max_space=word_len;
         max_space.address=address;
         max_space.old_address=old;
