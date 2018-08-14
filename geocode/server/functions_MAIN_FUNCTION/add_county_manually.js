@@ -1,6 +1,5 @@
 var fs = require('fs');
 var add_county_manually = function (mprn, list_word) {
-    list_new_word.push('');
     var list_new_word = list_word;
     var address = list_word.join(" ");
     var list_dublin = [
@@ -383,7 +382,9 @@ var add_county_manually = function (mprn, list_word) {
     // } else if (address == "CAMUS CINN MHARA CONAMARA") {
     //     list_new_word.push('');
 
-    } 
+    } else {
+        list_new_word.push('UNDEFINED');
+    }
     return list_new_word;
 }
 module.exports = add_county_manually;

@@ -9,8 +9,8 @@ var toCSV = function () {
     //console.log(dict_counties);
     toCSV([dict_counties['UNDEFINED']], 'undefined');
 
-    // var info_MPRN = require('../globalVariable/info_MPRN_address');
-    // toCSV(info_MPRN,'../../info_MPRN_address');
+    var info_MPRN = require('../globalVariable/info_MPRN_address');
+    toCSV(info_MPRN,'../../info_MPRN_address');
     //var address_not_E = require('../globalVariable/address_not_English');
     // console.log(address_not_E);
     //toCSV(address_not_E,'address_not_English');
