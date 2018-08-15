@@ -58,6 +58,9 @@ app.use(function (req, res, next) {
 
 app.listen(PORT, function () {
     console.log('Node.js web server at port 5000 is running ...');
+    app.get('/',function(req,res){
+        res.sender('index.pug');
+    })
 });
 
 module.exports = app;
