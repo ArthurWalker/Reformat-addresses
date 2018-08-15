@@ -5,7 +5,7 @@
   "scripts": {
     "start": "react-scripts start",
     "test": "react-scripts test --env=jsdom",
-    "server": "nodemon --max-old-space-size=6144 ./server/testing_action_server.js",
+    "server": "nodemon --max-old-space-size=6144 --watch server ./server/testing_action_server.js",
     "lint":"eslint"
   },
   "dependencies": {

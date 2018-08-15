@@ -2,9 +2,7 @@ import React from "react";
 
 class Homepage extends React.Component {
   render() {
-	return (
-		<div>Hi</div>
-	);
+    return <div>Hi</div>;
   }
 }
 
