@@ -257,7 +257,7 @@
       "import/no-duplicates": 2,
       "import/newline-after-import": 2,
       "import/unambiguous": 0,
-      "indent":1,
+      "indent": [2, "tab"],
       "import/extensions": [ 0, "always" ]
     }
   }
