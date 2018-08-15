@@ -12,7 +12,7 @@ module.exports = {
   entry: {
     client: [
       'webpack-hot-middleware/client',
-      './webapp/index.js'
+      './src/index.js'
     ]
   },
   output: {
@@ -35,17 +35,17 @@ module.exports = {
         test: /\.js$/,
         loaders: ["react-hot-loader/babel", "babel-loader"],
         exclude: "/node_modules",
-        include: path.join(__dirname, "./webapp")
+        include: path.join(__dirname, "./src")
       },{
         test: /\.jsx$/,
         loaders: ["react-hot-loader/babel", "babel-loader"],
         exclude: "/node_modules",
-        include: path.join(__dirname, "./webapp")
+        include: path.join(__dirname, "./src")
       },
       {
         test: /\.styl$/,
         loader: "style-loader!css-loader!stylus-loader",
-        include: path.join(__dirname, "./webapp")
+        include: path.join(__dirname, "./src")
       },
       {
         test: /\.(eot|woff|woff2|ttf|svg|png|jpg|gif)$/,

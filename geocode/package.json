@@ -2,11 +2,11 @@
   "name": "geocode",
   "version": "1.0.0",
   "private": true,
-  "main": "./server/testing_action_server.js",
   "scripts": {
-    "start": "node . --harmony",
+    "start": "react-scripts start",
     "test": "react-scripts test --env=jsdom",
-    "server": "nodemon --max-old-space-size=6144 ./server/testing_action_server.js"
+    "server": "nodemon --max-old-space-size=6144 ./server/testing_action_server.js",
+    "lint":"eslint"
   },
   "dependencies": {
     "aws-sdk": "^2.272.1",

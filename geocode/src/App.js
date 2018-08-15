@@ -1,15 +1,14 @@
-import React, {Component} from 'react';
-import logo from './logo.svg';
+import React from 'react';
 import {Route, Switch} from 'react-router-dom';
 import Homepage from './components/Homepage';
 
-const App = () => {
+const App = () => (
 	<div>
 		<Switch>
 			<Route component={Homepage} exact={true} path='/'/>
 		</Switch>
-	</div>;
-};
+	</div>
+);
 
 export default App;
 
