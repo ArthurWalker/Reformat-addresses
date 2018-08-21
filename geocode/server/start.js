@@ -11,6 +11,11 @@ var compare_without_db = require('./routes/withoutDatabase/compare_without_db');
 // res: the function tells express what to send back to the person making the request
 
 // Home page route.
+router.get('/',function(req,res){
+    res.json({'Message':'Server is live'});
+})
+
+
 router.get('/main', function (req, res) {
     // Go to views/index.pug
     //res.render('index', { title: 'Hey', message: 'Hello there!' })

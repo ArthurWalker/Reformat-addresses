@@ -1,4 +1,6 @@
 {"[typescript]": {
-    "editor.tabSize": 2
-}
+    "editor.tabSize": 8,
+    "editor.detectIndentation": false
+},
+"python.pythonPath": "C:\\Python27\\python.exe"
 }
