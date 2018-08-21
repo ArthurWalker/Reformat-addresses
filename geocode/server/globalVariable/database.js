@@ -1,7 +1,7 @@
 const sql = require('mssql');
 const dbConfigOpenData = {
     user: 'OpenDataLogin',
-    password: 'zHbF6cK8gzkCR6yKAnMF',
+    password: 'Frost2018!',
     server: '172.17.0.237', //SEAIREPORTSTG01
     database: 'OPEN_DATA',
     requestTimeout: 900000,
